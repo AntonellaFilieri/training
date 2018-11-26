@@ -1,7 +1,7 @@
 package com.training.demo;
 
 import com.training.demo.model.User;
-import com.training.demo.repository.UserMongoRepository;
+import com.training.demo.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class DemoApplicationTests {
     }
 
     @Autowired
-    private UserMongoRepository userMongoRepository;
+    private UserRepository userMongoRepository;
 
 
     @Before
