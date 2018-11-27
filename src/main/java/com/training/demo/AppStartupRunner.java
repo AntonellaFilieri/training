@@ -1,6 +1,7 @@
 package com.training.demo;
 
 
+import com.mongodb.MongoClient;
 import com.training.demo.model.User;
 import com.training.demo.repository.UserRepository;
 import org.slf4j.Logger;
