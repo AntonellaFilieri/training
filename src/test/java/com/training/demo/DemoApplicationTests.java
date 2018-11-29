@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +23,7 @@ public class DemoApplicationTests {
     }
 
     @Autowired
-    private UserRepository userMongoRepository;
+    private UserRepository userRepository;
 
 
     @Before
@@ -31,8 +33,8 @@ public class DemoApplicationTests {
         //save product, verify has ID value after save
         assertNull(user1.getId());
         assertNull(user2.getId());//null before save
-        this.userMongoRepository.save(user1);
-        this.userMongoRepository.save(user2);
+        this.userRepository.save(user1);
+        this.userRepository.save(user2);
         assertNotNull(user1.getId());
         assertNotNull(user2.getId());
     }
@@ -40,10 +42,10 @@ public class DemoApplicationTests {
     @Test
     public void testFetchData(){
         /*Test data retrieval*/
-        User userA = userMongoRepository.findByName("Bob");
+        Optional<User> userA = userRepository.findByName("Bob");
         assertNotNull(userA);
         /*Get all products, list should only have two*/
-        Iterable<User> users = userMongoRepository.findAll();
+        Iterable<User> users = userRepository.findAll();
         int count = 0;
         for(User p : users){
             count++;
@@ -54,15 +56,15 @@ public class DemoApplicationTests {
     @Test
     public void testDataUpdate(){
         /*Test update*/
-        User userB = userMongoRepository.findByName("Bob");
-        userMongoRepository.save(userB);
-        User userC= userMongoRepository.findByName("Bob");
-        assertNotNull(userC);
+        /*Optional<User> userB = userRepository.findByName("Bob");
+        userB.isPresent(userRepository.save(userB));
+        Optional<User> userC= userRepository.findByName("Bob");
+        assertNotNull(userC);*/
     }
 
     @After
     public void tearDown() throws Exception {
-        this.userMongoRepository.deleteAll();
+        this.userRepository.deleteAll();
     }
 
 
